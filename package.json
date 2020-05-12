@@ -2,7 +2,7 @@
   "version": "1.0.1",
   "description": "mini chatting ui for Vue.js",
   "homepage": "",
-  "name": "VueMiniChatter",
+  "name": "vue-mini-chatter",
   "main": "index.js",
   "license": "MIT",
   "author": {
@@ -25,12 +25,7 @@
     "moment": "^2.25.3"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
-    "babel-eslint": "^10.0.1",
-    "vue": "^2.6.10",
-    "vue-template-compiler": "^2.6.10"
+    "vue": "^2.6.11"
   },
   "engines": {
     "node": ">=10.0.1",
