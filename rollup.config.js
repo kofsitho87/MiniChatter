@@ -3,6 +3,8 @@ import css from 'rollup-plugin-css-only'
 import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+//import graphql from 'rollup-plugin-graphql'
+import gql from 'rollup-plugin-graphql-tag'
 //import uglify from 'rollup-plugin-uglify';
  
 
@@ -42,6 +44,7 @@ export default [
       babel({
         exclude: 'node_modules/**'
       }),
+      gql()
     ]
   }
 ]
