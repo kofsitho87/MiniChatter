@@ -1,9 +1,9 @@
 {
-  "version": "1.0.1",
+  "version": "0.0.1",
   "description": "mini chatting ui for Vue.js",
   "homepage": "",
-  "name": "vue-mini-chatter",
-  "main": "index.js",
+  "name": "@twosun/vue-mini-chatter",
+  "main": "src/index.js",
   "license": "MIT",
   "author": {
     "name": "SHW",
