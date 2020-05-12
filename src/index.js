@@ -6,7 +6,6 @@ export default {
       return
     }
     this.installed = true
-
     Vue.component('MiniChatter', MiniChatter)
   }
 }
