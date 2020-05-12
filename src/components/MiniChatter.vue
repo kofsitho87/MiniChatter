@@ -5,7 +5,7 @@
         <div v-for="message in messages" :key="message.id">
           <div class="flex my-4 items-start" :class="message.owner.id == user.id ? 'justify-end': 'justify-start'">
             <div class="mr-2" v-if="message.owner.id != user.id">
-              <img class="h-8 w-8 rounded-full" src="../assets/img/profile.png">
+              <!-- <img class="h-8 w-8 rounded-full" src="../assets/img/profile.png"> -->
             </div>
             <div>
               <div class="text-sm"> {{ message.owner.nickName }} </div>
@@ -47,7 +47,7 @@ import { split } from 'apollo-link'
 import { getMainDefinition } from 'apollo-utilities'
 
 import moment from "moment"
-import TextareaAutosize from './TextareaAutosize'
+import TextareaAutosize from './TextareaAutosize.vue'
 export default {
   props: {
     apiKey: {

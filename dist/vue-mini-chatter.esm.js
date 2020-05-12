@@ -1,16 +1,12 @@
-'use strict';
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var fetch = _interopDefault(require('node-fetch'));
-var gql = _interopDefault(require('graphql-tag'));
-var apolloClient = require('apollo-client');
-var apolloLinkHttp = require('apollo-link-http');
-var apolloCacheInmemory = require('apollo-cache-inmemory');
-var apolloLinkWs = require('apollo-link-ws');
-var apolloLink = require('apollo-link');
-var apolloUtilities = require('apollo-utilities');
-var moment = _interopDefault(require('moment'));
+import fetch from 'node-fetch';
+import gql from 'graphql-tag';
+import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { WebSocketLink } from 'apollo-link-ws';
+import { split } from 'apollo-link';
+import { getMainDefinition } from 'apollo-utilities';
+import moment from 'moment';
 
 //
 //
@@ -420,12 +416,12 @@ var script$1 = {
   },
 
   created() {
-    const httpLink = apolloLinkHttp.createHttpLink({
+    const httpLink = createHttpLink({
       // You should use an absolute URL here
       uri: 'http://localhost:9000/graphql',
       fetch: fetch
     });
-    const wsLink = new apolloLinkWs.WebSocketLink({
+    const wsLink = new WebSocketLink({
       uri: 'ws://localhost:9000/graphql',
       options: {
         reconnect: true,
@@ -437,16 +433,16 @@ var script$1 = {
     });
     this.wsLink = wsLink; // Cache implementation
 
-    const cache = new apolloCacheInmemory.InMemoryCache();
-    const link = apolloLink.split( // split based on operation type
+    const cache = new InMemoryCache();
+    const link = split( // split based on operation type
     ({
       query
     }) => {
-      const definition = apolloUtilities.getMainDefinition(query);
+      const definition = getMainDefinition(query);
       return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
     }, wsLink, httpLink); // Create the apollo client
 
-    this.apolloClient = new apolloClient.ApolloClient({
+    this.apolloClient = new ApolloClient({
       link: link,
       cache
     });
@@ -767,4 +763,4 @@ var index = {
 
 }; //export { MiniChatter }
 
-module.exports = index;
+export default index;
