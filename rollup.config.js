@@ -24,6 +24,7 @@ const external = [
 
 export default [
   {
+    external,
     input: 'src/index.js',
     output: [
       {
@@ -32,29 +33,31 @@ export default [
         //sourcemap: true
       },
       {
-				file: `dist/${FILE_NAME}.es.js`,
+				file: `dist/${FILE_NAME}.js`,
 				format: 'es',
 				//sourcemap: true
       },
-      {
-        format: 'esm',
-        file: `dist/${FILE_NAME}.esm.js`
-      },
-      {
-        external,
-        name: "VueMiniChatter",
-        file: `dist/${FILE_NAME}.js`,
-        format: 'iife'
-      },
-      {
-        external,
-        name: "VueMiniChatter",
-        file: `dist/${FILE_NAME}.umd.js`,
-        format: 'umd'
-      }
+      // {
+      //   format: 'esm',
+      //   file: `dist/${FILE_NAME}.esm.js`
+      // },
+      // {
+      //   external,
+      //   name: "VueMiniChatter",
+      //   file: `dist/${FILE_NAME}.js`,
+      //   format: 'iife'
+      // },
+      // {
+      //   external,
+      //   name: "VueMiniChatter",
+      //   file: `dist/${FILE_NAME}.umd.js`,
+      //   format: 'umd'
+      // }
     ],
     plugins: [
-      commonjs(),
+      commonjs({
+        //include: 'node_modules/**'
+      }),
       vue({
         //css: `dist/${FILE_NAME}.css`,
         css: true, 
