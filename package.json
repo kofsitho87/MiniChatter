@@ -13,8 +13,8 @@
     "type": "git",
     "url": "git+https://github.com/kofsitho87/MiniChatter.git"
   },
-  "main": "dist/vue-mini-chatter.esm.js",
-  "module": "dist/vue-mini-chatter.umd.js",
+  "main": "dist/vue-mini-chatter.umd.js",
+  "module": "dist/vue-mini-chatter.esm.js",
   "browser": "dist/vue-mini-chatter.js",
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.6",

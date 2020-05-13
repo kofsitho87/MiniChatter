@@ -49,6 +49,7 @@ import { getMainDefinition } from 'apollo-utilities'
 import moment from "moment"
 import TextareaAutosize from './TextareaAutosize.vue'
 export default {
+  name: 'VueMiniChatter',
   props: {
     apiKey: {
       type: String,

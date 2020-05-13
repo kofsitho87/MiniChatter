@@ -3528,101 +3528,17 @@ var VueMiniChatter = (function (exports, fetch, apolloClient, apolloLinkHttp, ap
   var __vue_script__ = script;
 
   /* template */
-  var __vue_render__ = function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "textarea" }, [
-      _c("div", { staticClass: "flex" }, [
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.currentValue,
-              expression: "currentValue"
-            }
-          ],
-          staticClass: "block w-full p-2 rounded-none border-t",
-          style: _vm.computedStyles,
-          attrs: { placeholder: _vm.placeholder, disabled: _vm.disabled },
-          domProps: { value: _vm.currentValue },
-          on: {
-            focus: _vm.resize,
-            keyup: function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
-              }
-              if (
-                $event.ctrlKey ||
-                $event.shiftKey ||
-                $event.altKey ||
-                $event.metaKey
-              ) {
-                return null
-              }
-              return _vm.sendMessage($event)
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.currentValue = $event.target.value;
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex" }, [
-          _c(
-            "button",
-            {
-              staticClass: "bg-blue-700 px-2 text-white",
-              attrs: { type: "button" },
-              on: { click: _vm.sendMessage }
-            },
-            [_vm._v("Send")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.currentValue,
-            expression: "currentValue"
-          }
-        ],
-        ref: "shadow",
-        staticClass: "shadow",
-        attrs: { tabindex: "0" },
-        domProps: { value: _vm.currentValue },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.currentValue = $event.target.value;
-          }
-        }
-      })
-    ])
-  };
+  var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"textarea"},[_c('div',{staticClass:"flex"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentValue),expression:"currentValue"}],staticClass:"block w-full p-2 rounded-none border-t",style:(_vm.computedStyles),attrs:{"placeholder":_vm.placeholder,"disabled":_vm.disabled},domProps:{"value":(_vm.currentValue)},on:{"focus":_vm.resize,"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }if($event.ctrlKey||$event.shiftKey||$event.altKey||$event.metaKey){ return null; }return _vm.sendMessage($event)},"input":function($event){if($event.target.composing){ return; }_vm.currentValue=$event.target.value;}}}),_vm._v(" "),_c('div',{staticClass:"flex"},[_c('button',{staticClass:"bg-blue-700 px-2 text-white",attrs:{"type":"button"},on:{"click":_vm.sendMessage}},[_vm._v("Send")])])]),_vm._v(" "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentValue),expression:"currentValue"}],ref:"shadow",staticClass:"shadow",attrs:{"tabindex":"0"},domProps:{"value":(_vm.currentValue)},on:{"input":function($event){if($event.target.composing){ return; }_vm.currentValue=$event.target.value;}}})])};
   var __vue_staticRenderFns__ = [];
-  __vue_render__._withStripped = true;
 
     /* style */
     var __vue_inject_styles__ = function (inject) {
       if (!inject) { return }
-      inject("data-v-a7459d6a_0", { source: ".textarea[data-v-a7459d6a] {\n  position: relative;\n}\n.textarea textarea[data-v-a7459d6a] {\n  position: relative;\n  z-index: 100;\n  resize: none;\n  overflow: auto;\n  font-size: 16px;\n  height: 0;\n}\n.textarea textarea.shadow[data-v-a7459d6a] {\n  max-height: 0;\n  pointer-events: none;\n  opacity: 0;\n  margin: 0;\n  padding: 0;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n/*# sourceMappingURL=TextareaAutosize.vue.map */", map: {"version":3,"sources":["/Users/heewungsong/Desktop/WEB/MiniChatter/src/components/TextareaAutosize.vue","TextareaAutosize.vue"],"names":[],"mappings":"AAwGA;EACA,kBAAA;ACvGA;ADyGA;EACA,kBAAA;EACA,YAAA;EACA,YAAA;EACA,cAAA;EACA,eAAA;EACA,SAAA;ACvGA;ADyGA;EACA,aAAA;EACA,oBAAA;EACA,UAAA;EACA,SAAA;EACA,UAAA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;ACvGA;;AAEA,+CAA+C","file":"TextareaAutosize.vue","sourcesContent":["<template>\n  <div class=\"textarea\">\n    <div class=\"flex\">\n      <textarea \n        :placeholder=\"placeholder\" \n        class=\"block w-full p-2 rounded-none border-t\"\n        :style=\"computedStyles\"\n        @focus=\"resize\"\n        v-model=\"currentValue\"\n        :disabled=\"disabled\"\n        @keyup.enter.exact=\"sendMessage($event)\"\n      ></textarea>\n      <div class=\"flex\">\n        <button class=\"bg-blue-700 px-2 text-white\" type=\"button\" @click=\"sendMessage\">Send</button>\n      </div>\n    </div>\n    <textarea class=\"shadow\" v-model=\"currentValue\" ref=\"shadow\" tabindex=\"0\"></textarea>\n  </div>\n</template>\n\n<script>\nexport default {\n  props: {\n    placeholder: {\n      type: String,\n      default: \"\"\n    },\n    autosize: {\n      type: Boolean,\n      default: true\n    },\n    minHeight: {\n      type: [Number],\n      default: null\n    },\n    maxHeight: {\n      type: [Number],\n      default: null\n    },\n    disabled: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data () {\n    return {\n      // data property for v-model binding with real textarea tag\n      currentValue: null,\n      // works when content height becomes more then value of the maxHeight property\n      maxHeightScroll: false,\n      inputHeight: 0\n    }\n  },\n  computed: {\n    computedStyles () {\n      if (!this.autosize) return {}\n      return {\n        'min-height': this.inputHeight\n      }\n    },\n  },\n   watch: {\n    currentValue (val) {\n      this.$nextTick(this.resize)\n      //this.$emit('input', val)\n    },\n    minHeight () {\n      this.$nextTick(this.resize)\n    },\n    maxHeight () {\n      this.$nextTick(this.resize)\n    },\n    autosize (val) {\n      if (val) this.resize()\n    }\n  },\n  mounted(){\n    this.resize()\n  },\n  methods: {\n    resize(e){\n      let contentHeight = this.$refs.shadow.scrollHeight\n      if (this.minHeight) {\n        contentHeight = contentHeight < this.minHeight ? this.minHeight : contentHeight\n      }\n      if (this.maxHeight) {\n        if (contentHeight > this.maxHeight) {\n          contentHeight = this.maxHeight\n          this.maxHeightScroll = true\n        } else {\n          this.maxHeightScroll = false\n        }\n      }\n      this.inputHeight = `${contentHeight}px`\n      return this\n    },\n    sendMessage(){\n      this.$emit(\"sendMessage\", this.currentValue)\n    }\n  }\n}\n</script>\n\n<style scoped lang=\"scss\">\n.textarea {\n  position: relative;\n\n  textarea {\n    position: relative;\n    z-index: 100;\n    resize: none;\n    overflow: auto;\n    font-size: 16px;\n    height: 0;\n\n    &.shadow {\n      max-height: 0;\n      pointer-events: none;\n      opacity: 0;\n      margin: 0;\n      padding:0;\n      position: absolute;\n      left: 0;\n      top:0;\n    }\n  }\n}\n</style>",".textarea {\n  position: relative;\n}\n.textarea textarea {\n  position: relative;\n  z-index: 100;\n  resize: none;\n  overflow: auto;\n  font-size: 16px;\n  height: 0;\n}\n.textarea textarea.shadow {\n  max-height: 0;\n  pointer-events: none;\n  opacity: 0;\n  margin: 0;\n  padding: 0;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n/*# sourceMappingURL=TextareaAutosize.vue.map */"]}, media: undefined });
+      inject("data-v-6965cf19_0", { source: ".textarea[data-v-6965cf19]{position:relative}.textarea textarea[data-v-6965cf19]{position:relative;z-index:100;resize:none;overflow:auto;font-size:16px;height:0}.textarea textarea.shadow[data-v-6965cf19]{max-height:0;pointer-events:none;opacity:0;margin:0;padding:0;position:absolute;left:0;top:0}", map: undefined, media: undefined });
 
     };
     /* scoped */
-    var __vue_scope_id__ = "data-v-a7459d6a";
+    var __vue_scope_id__ = "data-v-6965cf19";
     /* module identifier */
     var __vue_module_identifier__ = undefined;
     /* functional template */
@@ -3686,6 +3602,7 @@ var VueMiniChatter = (function (exports, fetch, apolloClient, apolloLinkHttp, ap
     return data;
   }
   var script$1 = {
+    name: 'VueMiniChatter',
     props: {
       apiKey: {
         type: String,
@@ -3983,95 +3900,19 @@ var VueMiniChatter = (function (exports, fetch, apolloClient, apolloLinkHttp, ap
   var __vue_script__$1 = script$1;
 
   /* template */
-  var __vue_render__$1 = function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("main", { staticClass: "flex flex-column" }, [
-      _c("div", { staticClass: "h-screen bg-red-200 flex-1 flex flex-column" }, [
-        _c(
-          "div",
-          {
-            ref: "messages",
-            staticClass: "px-4 flex-1 overflow-scroll",
-            attrs: { id: "messages" }
-          },
-          _vm._l(_vm.messages, function(message) {
-            return _c("div", { key: message.id }, [
-              _c(
-                "div",
-                {
-                  staticClass: "flex my-4 items-start",
-                  class:
-                    message.owner.id == _vm.user.id
-                      ? "justify-end"
-                      : "justify-start"
-                },
-                [
-                  message.owner.id != _vm.user.id
-                    ? _c("div", { staticClass: "mr-2" })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("div", { staticClass: "text-sm" }, [
-                      _vm._v(" " + _vm._s(message.owner.nickName) + " ")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", {
-                      staticClass: "bg-red-400 p-2 rounded text-md",
-                      domProps: { innerHTML: _vm._s(_vm.nl2br(message.content)) }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text-xs" }, [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(_vm._f("dateFormat")(message.createdAt)) +
-                          "\n            "
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ])
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { attrs: { id: "input_container" } },
-          [
-            _c("textarea-autosize", {
-              ref: "input",
-              attrs: {
-                placeholder: "Type something here...",
-                "min-height": 50,
-                "max-height": 200,
-                disabled: false
-              },
-              on: { sendMessage: _vm.sendMessage }
-            })
-          ],
-          1
-        )
-      ])
-    ])
-  };
+  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('main',{staticClass:"flex flex-column"},[_c('div',{staticClass:"h-screen bg-red-200 flex-1 flex flex-column"},[_c('div',{ref:"messages",staticClass:"px-4 flex-1 overflow-scroll",attrs:{"id":"messages"}},_vm._l((_vm.messages),function(message){return _c('div',{key:message.id},[_c('div',{staticClass:"flex my-4 items-start",class:message.owner.id == _vm.user.id ? 'justify-end': 'justify-start'},[(message.owner.id != _vm.user.id)?_c('div',{staticClass:"mr-2"}):_vm._e(),_vm._v(" "),_c('div',[_c('div',{staticClass:"text-sm"},[_vm._v(" "+_vm._s(message.owner.nickName)+" ")]),_vm._v(" "),_c('div',{staticClass:"bg-red-400 p-2 rounded text-md",domProps:{"innerHTML":_vm._s(_vm.nl2br(message.content))}}),_vm._v(" "),_c('div',{staticClass:"text-xs"},[_vm._v("\n              "+_vm._s(_vm._f("dateFormat")(message.createdAt))+"\n            ")])])])])}),0),_vm._v(" "),_c('div',{attrs:{"id":"input_container"}},[_c('textarea-autosize',{ref:"input",attrs:{"placeholder":"Type something here...","min-height":50,"max-height":200,"disabled":false},on:{"sendMessage":_vm.sendMessage}})],1)])])};
   var __vue_staticRenderFns__$1 = [];
-  __vue_render__$1._withStripped = true;
 
     /* style */
-    var __vue_inject_styles__$1 = function (inject) {
-      if (!inject) { return }
-      inject("data-v-10c2f8d3_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"MiniChatter.vue"}, media: undefined });
-
-    };
+    var __vue_inject_styles__$1 = undefined;
     /* scoped */
     var __vue_scope_id__$1 = undefined;
     /* module identifier */
     var __vue_module_identifier__$1 = undefined;
     /* functional template */
     var __vue_is_functional_template__$1 = false;
+    /* style inject */
+    
     /* style inject SSR */
     
     /* style inject shadow dom */
@@ -4086,7 +3927,7 @@ var VueMiniChatter = (function (exports, fetch, apolloClient, apolloLinkHttp, ap
       __vue_is_functional_template__$1,
       __vue_module_identifier__$1,
       false,
-      createInjector,
+      undefined,
       undefined,
       undefined
     );

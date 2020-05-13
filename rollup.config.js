@@ -11,6 +11,17 @@ import buble from 'rollup-plugin-buble'
 
 const FILE_NAME = "vue-mini-chatter"
 
+const external = [
+  "apollo-cache-inmemory",
+  "apollo-client",
+  "apollo-link",
+  "apollo-link-http",
+  "apollo-link-ws",
+  "apollo-utilities",
+  "graphql-tag",
+  "moment"
+]
+
 export default [
   {
     input: 'src/index.js',
@@ -30,11 +41,13 @@ export default [
         file: `dist/${FILE_NAME}.esm.js`
       },
       {
+        external,
         name: "VueMiniChatter",
         file: `dist/${FILE_NAME}.js`,
         format: 'iife'
       },
       {
+        external,
         name: "VueMiniChatter",
         file: `dist/${FILE_NAME}.umd.js`,
         format: 'umd'
@@ -46,6 +59,9 @@ export default [
         //css: `dist/${FILE_NAME}.css`,
         css: true, 
         compileTemplate: true,
+        template: {
+          isProduction: true,
+        },
       }),
       resolve({
         browser: true
