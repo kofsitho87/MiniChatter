@@ -5,6 +5,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 //import graphql from 'rollup-plugin-graphql'
 import gql from 'rollup-plugin-graphql-tag'
+import buble from 'rollup-plugin-buble'
 //import uglify from 'rollup-plugin-uglify';
  
 
@@ -36,15 +37,24 @@ export default [
     plugins: [
       commonjs(),
       vue({
-        css: `dist/${FILE_NAME}.css`,
+        //css: `dist/${FILE_NAME}.css`,
+        css: true, 
+        compileTemplate: true,
       }),
       resolve({
         browser: true
       }),
       babel({
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
+        presets: ["@babel/env"],
+        // plugins: [
+        //   "@babel/transform-runtime",
+        //   "@babel/transform-async-to-generator",
+        // ],
+        runtimeHelpers: true,
       }),
-      gql()
+      gql(),
+      buble()
     ]
   }
 ]
