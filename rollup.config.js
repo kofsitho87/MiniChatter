@@ -30,8 +30,14 @@ export default [
         file: `dist/${FILE_NAME}.esm.js`
       },
       {
+        name: "VueMiniChatter",
         file: `dist/${FILE_NAME}.js`,
         format: 'iife'
+      },
+      {
+        name: "VueMiniChatter",
+        file: `dist/${FILE_NAME}.umd.js`,
+        format: 'umd'
       }
     ],
     plugins: [

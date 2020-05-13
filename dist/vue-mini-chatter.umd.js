@@ -1,5 +1,8 @@
-var VueMiniChatter = (function (exports, fetch, apolloClient, apolloLinkHttp, apolloCacheInmemory, apolloLinkWs, apolloLink, apolloUtilities, moment) {
-  'use strict';
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('node-fetch'), require('apollo-client'), require('apollo-link-http'), require('apollo-cache-inmemory'), require('apollo-link-ws'), require('apollo-link'), require('apollo-utilities'), require('moment')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'node-fetch', 'apollo-client', 'apollo-link-http', 'apollo-cache-inmemory', 'apollo-link-ws', 'apollo-link', 'apollo-utilities', 'moment'], factory) :
+  (global = global || self, factory(global.VueMiniChatter = {}, global.fetch, global.apolloClient, global.apolloLinkHttp, global.apolloCacheInmemory, global.apolloLinkWs, global.apolloLink, global.apolloUtilities, global.moment));
+}(this, (function (exports, fetch, apolloClient, apolloLinkHttp, apolloCacheInmemory, apolloLinkWs, apolloLink, apolloUtilities, moment) { 'use strict';
 
   fetch = fetch && Object.prototype.hasOwnProperty.call(fetch, 'default') ? fetch['default'] : fetch;
   moment = moment && Object.prototype.hasOwnProperty.call(moment, 'default') ? moment['default'] : moment;
@@ -4124,6 +4127,6 @@ var VueMiniChatter = (function (exports, fetch, apolloClient, apolloLinkHttp, ap
   exports.default = __vue_component__$1;
   exports.install = install;
 
-  return exports;
+  Object.defineProperty(exports, '__esModule', { value: true });
 
-}({}, fetch, apolloClient, apolloLinkHttp, apolloCacheInmemory, apolloLinkWs, apolloLink, apolloUtilities, moment));
+})));
