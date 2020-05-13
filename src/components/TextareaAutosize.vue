@@ -60,9 +60,8 @@ export default {
     },
   },
    watch: {
-    currentValue (val) {
+    currentValue () {
       this.$nextTick(this.resize)
-      //this.$emit('input', val)
     },
     minHeight () {
       this.$nextTick(this.resize)
@@ -78,7 +77,7 @@ export default {
     this.resize()
   },
   methods: {
-    resize(e){
+    resize(){
       let contentHeight = this.$refs.shadow.scrollHeight
       if (this.minHeight) {
         contentHeight = contentHeight < this.minHeight ? this.minHeight : contentHeight

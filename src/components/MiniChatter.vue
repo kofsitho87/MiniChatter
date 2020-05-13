@@ -32,11 +32,6 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// import VueApollo from 'vue-apollo'
-
-
-
 import fetch from 'node-fetch'
 import gql from 'graphql-tag'
 import { ApolloClient } from 'apollo-client'

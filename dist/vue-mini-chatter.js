@@ -1,94 +1,96 @@
-import fetch from 'node-fetch';
-import gql from 'graphql-tag';
-import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { WebSocketLink } from 'apollo-link-ws';
-import { split } from 'apollo-link';
-import { getMainDefinition } from 'apollo-utilities';
-import moment from 'moment';
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-function _taggedTemplateLiteral(strings, raw) {
-  if (!raw) {
-    raw = strings.slice(0);
-  }
-
-  return Object.freeze(Object.defineProperties(strings, {
-    raw: {
-      value: Object.freeze(raw)
-    }
-  }));
-}
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
-}
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
-  return arr2;
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
+import fetch from"node-fetch";import gql from"graphql-tag";import{ApolloClient}from"apollo-client";import{createHttpLink}from"apollo-link-http";import{InMemoryCache}from"apollo-cache-inmemory";import{WebSocketLink}from"apollo-link-ws";import{split}from"apollo-link";import{getMainDefinition}from"apollo-utilities";import moment from"moment";function _arrayLikeToArray(a,b){(null==b||b>a.length)&&(b=a.length);for(var c=0,d=Array(b);c<b;c++)d[c]=a[c];return d}var arrayLikeToArray=_arrayLikeToArray;function _arrayWithoutHoles(a){if(Array.isArray(a))return arrayLikeToArray(a)}var arrayWithoutHoles=_arrayWithoutHoles;function _iterableToArray(a){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(a))return Array.from(a)}var iterableToArray=_iterableToArray;function _unsupportedIterableToArray(a,b){if(a){if("string"==typeof a)return arrayLikeToArray(a,b);var c=Object.prototype.toString.call(a).slice(8,-1);return"Object"===c&&a.constructor&&(c=a.constructor.name),"Map"===c||"Set"===c?Array.from(a):"Arguments"===c||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(c)?arrayLikeToArray(a,b):void 0}}var unsupportedIterableToArray=_unsupportedIterableToArray;function _nonIterableSpread(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var nonIterableSpread=_nonIterableSpread;function _toConsumableArray(a){return arrayWithoutHoles(a)||iterableToArray(a)||unsupportedIterableToArray(a)||nonIterableSpread()}var toConsumableArray=_toConsumableArray;function createCommonjsModule(a,b){return b={exports:{}},a(b,b.exports),b.exports}var runtime_1=createCommonjsModule(function(a){/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var b=function(a){function b(a,b,c,e){// If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+var f=b&&b.prototype instanceof d?b:d,g=Object.create(f.prototype),h=new m(e||[]);return g._invoke=i(a,c,h),g}// Try/catch helper to minimize deoptimizations. Returns a completion
+// record like context.tryEntries[i].completion. This interface could
+// have been (and was previously) designed to take a closure to be
+// invoked without arguments, but in all the cases we care about we
+// already have an existing method we want to call, so there's no need
+// to create a new function object. We can even get away with assuming
+// the method takes exactly one argument, since that happens to be true
+// in every case, so we don't have to touch the arguments object. The
+// only additional allocation required is the completion record, which
+// has a stable shape and so hopefully should be cheap to allocate.
+function c(a,b,c){try{return{type:"normal",arg:a.call(b,c)}}catch(a){return{type:"throw",arg:a}}}// Dummy constructor functions that we use as the .constructor and
+// .constructor.prototype properties for functions that return Generator
+// objects. For full spec compliance, you may wish to configure your
+// minifier not to mangle the names of these two functions.
+function d(){}function e(){}function f(){}// This is a polyfill for %IteratorPrototype% for environments that
+// don't natively support it.
+// Helper for defining the .next, .throw, and .return methods of the
+// Iterator interface in terms of a single ._invoke method.
+function g(a){["next","throw","return"].forEach(function(b){a[b]=function(a){return this._invoke(b,a)}})}function h(a,b){function d(e,f,g,h){var i=c(a[e],a,f);if("throw"===i.type)h(i.arg);else{var j=i.arg,k=j.value;return k&&"object"==typeof k&&r.call(k,"__await")?b.resolve(k.__await).then(function(a){d("next",a,g,h)},function(a){d("throw",a,g,h)}):b.resolve(k).then(function(a){j.value=a,g(j)},function(a){// If a rejected Promise was yielded, throw the rejection back
+// into the async generator function so it can be handled there.
+return d("throw",a,g,h)})}}function e(a,c){function e(){return new b(function(b,e){d(a,c,b,e)})}return f=// If enqueue has been called before, then we want to wait until
+// all previous Promises have been resolved before calling invoke,
+// so that results are always delivered in the correct order. If
+// enqueue has not been called before, then it is important to
+// call invoke immediately, without waiting on a callback to fire,
+// so that the async generator function has the opportunity to do
+// any necessary setup in a predictable way. This predictability
+// is why the Promise constructor synchronously invokes its
+// executor callback, and why async functions synchronously
+// execute code before the first await. Since we implement simple
+// async functions in terms of async generators, it is especially
+// important to get this right, even though it requires care.
+f?f.then(e,// Avoid propagating failures to Promises returned by later
+// invocations of the iterator.
+e):e()}// Define the unified helper method that is used to implement .next,
+// .throw, and .return (see defineIteratorMethods).
+var f;this._invoke=e}function i(a,b,d){var e="suspendedStart";return function(f,g){if("executing"===e)throw new Error("Generator is already running");if("completed"===e){if("throw"===f)throw g;// Be forgiving, per 25.3.3.3.3 of the spec:
+// https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+return o()}for(d.method=f,d.arg=g;;){var h=d.delegate;if(h){var i=j(h,d);if(i){if(i===w)continue;return i}}if("next"===d.method)d.sent=d._sent=d.arg;else if("throw"===d.method){if("suspendedStart"===e)throw e="completed",d.arg;d.dispatchException(d.arg)}else"return"===d.method&&d.abrupt("return",d.arg);e="executing";var k=c(a,b,d);if("normal"===k.type){if(e=d.done?"completed":"suspendedYield",k.arg===w)continue;return{value:k.arg,done:d.done}}"throw"===k.type&&(// Dispatch the exception by looping back around to the
+// context.dispatchException(context.arg) call above.
+e="completed",d.method="throw",d.arg=k.arg)}}}// Call delegate.iterator[context.method](context.arg) and handle the
+// result, either by returning a { value, done } result from the
+// delegate iterator, or by modifying context.method and context.arg,
+// setting context.delegate to null, and returning the ContinueSentinel.
+function j(a,b){var d=a.iterator[b.method];if(d===p){if(b.delegate=null,"throw"===b.method){// Note: ["return"] must be used for ES3 parsing compatibility.
+if(a.iterator["return"]&&(b.method="return",b.arg=p,j(a,b),"throw"===b.method))// If maybeInvokeDelegate(context) changed context.method from
+// "return" to "throw", let that override the TypeError below.
+return w;b.method="throw",b.arg=new TypeError("The iterator does not provide a 'throw' method")}return w}var e=c(d,a.iterator,b.arg);if("throw"===e.type)return b.method="throw",b.arg=e.arg,b.delegate=null,w;var f=e.arg;if(!f)return b.method="throw",b.arg=new TypeError("iterator result is not an object"),b.delegate=null,w;if(f.done)b[a.resultName]=f.value,b.next=a.nextLoc,"return"!==b.method&&(b.method="next",b.arg=p);else// Re-yield the result returned by the delegate method.
+return f;// The delegate iterator is finished, so forget it and continue with
+// the outer generator.
+return b.delegate=null,w}// Define Generator.prototype.{next,throw,return} in terms of the
+// unified ._invoke helper method.
+function k(a){var b={tryLoc:a[0]};1 in a&&(b.catchLoc=a[1]),2 in a&&(b.finallyLoc=a[2],b.afterLoc=a[3]),this.tryEntries.push(b)}function l(a){var b=a.completion||{};b.type="normal",delete b.arg,a.completion=b}function m(a){this.tryEntries=[{tryLoc:"root"}],a.forEach(k,this),this.reset(!0)}function n(a){if(a){var b=a[t];if(b)return b.call(a);if("function"==typeof a.next)return a;if(!isNaN(a.length)){var c=-1,d=function b(){for(;++c<a.length;)if(r.call(a,c))return b.value=a[c],b.done=!1,b;return b.value=p,b.done=!0,b};return d.next=d}}// Return an iterator with no values.
+return{next:o}}function o(){return{value:p,done:!0}}var p,q=Object.prototype,r=q.hasOwnProperty,s="function"==typeof Symbol?Symbol:{},t=s.iterator||"@@iterator",u=s.asyncIterator||"@@asyncIterator",v=s.toStringTag||"@@toStringTag";a.wrap=b;var w={},x={};x[t]=function(){return this};var y=Object.getPrototypeOf,z=y&&y(y(n([])));z&&z!==q&&r.call(z,t)&&(x=z);var A=f.prototype=d.prototype=Object.create(x);// Regardless of whether this script is executing as a CommonJS module
+// or not, return the runtime object so that we can declare the variable
+// regeneratorRuntime in the outer scope, which allows this module to be
+// injected easily by `bin/regenerator --include-runtime script.js`.
+return e.prototype=A.constructor=f,f.constructor=e,f[v]=e.displayName="GeneratorFunction",a.isGeneratorFunction=function(a){var b="function"==typeof a&&a.constructor;return!!b&&(b===e||// For the native GeneratorFunction constructor, the best we can
+// do is to check its .name property.
+"GeneratorFunction"===(b.displayName||b.name))},a.mark=function(a){return Object.setPrototypeOf?Object.setPrototypeOf(a,f):(a.__proto__=f,!(v in a)&&(a[v]="GeneratorFunction")),a.prototype=Object.create(A),a},a.awrap=function(a){return{__await:a}},g(h.prototype),h.prototype[u]=function(){return this},a.AsyncIterator=h,a.async=function(c,d,e,f,g){void 0===g&&(g=Promise);var i=new h(b(c,d,e,f),g);return a.isGeneratorFunction(d)?i// If outerFn is a generator, return the full iterator.
+:i.next().then(function(a){return a.done?a.value:i.next()})},g(A),A[v]="Generator",A[t]=function(){return this},A.toString=function(){return"[object Generator]"},a.keys=function(a){var b=[];for(var c in a)b.push(c);// Rather than returning an object with a next method, we keep
+// things simple and return the next function itself.
+return b.reverse(),function c(){for(;b.length;){var d=b.pop();if(d in a)return c.value=d,c.done=!1,c}// To avoid creating an additional object, we just hang the .value
+// and .done properties off the next function object itself. This
+// also ensures that the minifier will not anonymize the function.
+return c.done=!0,c}},a.values=n,m.prototype={constructor:m,reset:function(a){if(this.prev=0,this.next=0,this.sent=this._sent=p,this.done=!1,this.delegate=null,this.method="next",this.arg=p,this.tryEntries.forEach(l),!a)for(var b in this)// Not sure about the optimal order of these conditions:
+"t"===b.charAt(0)&&r.call(this,b)&&!isNaN(+b.slice(1))&&(this[b]=p)},stop:function(){this.done=!0;var a=this.tryEntries[0],b=a.completion;if("throw"===b.type)throw b.arg;return this.rval},dispatchException:function(a){function b(b,d){return f.type="throw",f.arg=a,c.next=b,d&&(c.method="next",c.arg=p),!!d}if(this.done)throw a;for(var c=this,d=this.tryEntries.length-1;0<=d;--d){var e=this.tryEntries[d],f=e.completion;if("root"===e.tryLoc)// Exception thrown outside of any try block that could handle
+// it, so set the completion value of the entire function to
+// throw the exception.
+return b("end");if(e.tryLoc<=this.prev){var g=r.call(e,"catchLoc"),h=r.call(e,"finallyLoc");if(g&&h){if(this.prev<e.catchLoc)return b(e.catchLoc,!0);if(this.prev<e.finallyLoc)return b(e.finallyLoc)}else if(g){if(this.prev<e.catchLoc)return b(e.catchLoc,!0);}else if(!h)throw new Error("try statement without catch or finally");else if(this.prev<e.finallyLoc)return b(e.finallyLoc)}}},abrupt:function(a,b){for(var c,d=this.tryEntries.length-1;0<=d;--d)if(c=this.tryEntries[d],c.tryLoc<=this.prev&&r.call(c,"finallyLoc")&&this.prev<c.finallyLoc){var e=c;break}e&&("break"===a||"continue"===a)&&e.tryLoc<=b&&b<=e.finallyLoc&&(e=null);var f=e?e.completion:{};return f.type=a,f.arg=b,e?(this.method="next",this.next=e.finallyLoc,w):this.complete(f)},complete:function(a,b){if("throw"===a.type)throw a.arg;return"break"===a.type||"continue"===a.type?this.next=a.arg:"return"===a.type?(this.rval=this.arg=a.arg,this.method="return",this.next="end"):"normal"===a.type&&b&&(this.next=b),w},finish:function(a){for(var b,c=this.tryEntries.length-1;0<=c;--c)if(b=this.tryEntries[c],b.finallyLoc===a)return this.complete(b.completion,b.afterLoc),l(b),w},catch:function(a){for(var b,c=this.tryEntries.length-1;0<=c;--c)if(b=this.tryEntries[c],b.tryLoc===a){var d=b.completion;if("throw"===d.type){var e=d.arg;l(b)}return e}// The context.catch method must only be called with a location
+// argument that corresponds to a known catch block.
+throw new Error("illegal catch attempt")},delegateYield:function(a,b,c){return this.delegate={iterator:n(a),resultName:b,nextLoc:c},"next"===this.method&&(this.arg=p),w}},a}(// If this script is executing as a CommonJS module, use module.exports
+// as the regeneratorRuntime namespace. Otherwise create a new empty
+// object. Either way, the resulting object will be used to initialize
+// the regeneratorRuntime variable at the top of this file.
+a.exports);try{regeneratorRuntime=b}catch(a){// This module should not be running in strict mode, so the above
+// assignment should always work unless something is misconfigured. Just
+// in case runtime.js accidentally runs in strict mode, we can escape
+// strict mode using a global Function call. This could conceivably fail
+// if a Content Security Policy forbids using Function, but in that case
+// the proper solution is to fix the accidental strict mode problem. If
+// you've misconfigured your bundler to force strict mode and applied a
+// CSP to forbid Function, and you're not willing to fix either of those
+// problems, please detail your unique predicament in a GitHub issue.
+Function("r","regeneratorRuntime = r")(b)}}),regenerator=runtime_1;function _taggedTemplateLiteral(a,b){return b||(b=a.slice(0)),Object.freeze(Object.defineProperties(a,{raw:{value:Object.freeze(b)}}))}var taggedTemplateLiteral=_taggedTemplateLiteral;function asyncGeneratorStep(a,b,c,d,e,f,g){try{var h=a[f](g),i=h.value}catch(a){return void c(a)}h.done?b(i):Promise.resolve(i).then(d,e)}function _asyncToGenerator(a){return function(){var b=this,c=arguments;return new Promise(function(d,e){function f(a){asyncGeneratorStep(h,d,e,f,g,"next",a)}function g(a){asyncGeneratorStep(h,d,e,f,g,"throw",a)}var h=a.apply(b,c);f(void 0)})}}var asyncToGenerator=_asyncToGenerator,script={props:{placeholder:{type:String,default:""},autosize:{type:Boolean,default:!0},minHeight:{type:[Number],default:null},maxHeight:{type:[Number],default:null},disabled:{type:Boolean,default:!0}},data:function(){return{// data property for v-model binding with real textarea tag
+currentValue:null,// works when content height becomes more then value of the maxHeight property
+maxHeightScroll:!1,inputHeight:0}},computed:{computedStyles:function(){return this.autosize?{"min-height":this.inputHeight}:{}}},watch:{currentValue:function(){this.$nextTick(this.resize)},minHeight:function(){this.$nextTick(this.resize)},maxHeight:function(){this.$nextTick(this.resize)},autosize:function(a){a&&this.resize()}},mounted:function(){this.resize()},methods:{resize:function(){var a=this.$refs.shadow.scrollHeight;return this.minHeight&&(a=a<this.minHeight?this.minHeight:a),this.maxHeight&&(a>this.maxHeight?(a=this.maxHeight,this.maxHeightScroll=!0):this.maxHeightScroll=!1),this.inputHeight="".concat(a,"px"),this},sendMessage:function(){this.$emit("sendMessage",this.currentValue)}}};//
 //
 //
 //
@@ -108,627 +110,18 @@ function _nonIterableSpread() {
 //
 //
 //
-//
-var script = {
-  props: {
-    placeholder: {
-      type: String,
-      default: ""
-    },
-    autosize: {
-      type: Boolean,
-      default: true
-    },
-    minHeight: {
-      type: [Number],
-      default: null
-    },
-    maxHeight: {
-      type: [Number],
-      default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: true
-    }
-  },
-  data: function data() {
-    return {
-      // data property for v-model binding with real textarea tag
-      currentValue: null,
-      // works when content height becomes more then value of the maxHeight property
-      maxHeightScroll: false,
-      inputHeight: 0
-    };
-  },
-  computed: {
-    computedStyles: function computedStyles() {
-      if (!this.autosize) { return {}; }
-      return {
-        'min-height': this.inputHeight
-      };
-    }
-  },
-  watch: {
-    currentValue: function currentValue(val) {
-      this.$nextTick(this.resize); //this.$emit('input', val)
-    },
-    minHeight: function minHeight() {
-      this.$nextTick(this.resize);
-    },
-    maxHeight: function maxHeight() {
-      this.$nextTick(this.resize);
-    },
-    autosize: function autosize(val) {
-      if (val) { this.resize(); }
-    }
-  },
-  mounted: function mounted() {
-    this.resize();
-  },
-  methods: {
-    resize: function resize(e) {
-      var contentHeight = this.$refs.shadow.scrollHeight;
-
-      if (this.minHeight) {
-        contentHeight = contentHeight < this.minHeight ? this.minHeight : contentHeight;
-      }
-
-      if (this.maxHeight) {
-        if (contentHeight > this.maxHeight) {
-          contentHeight = this.maxHeight;
-          this.maxHeightScroll = true;
-        } else {
-          this.maxHeightScroll = false;
-        }
-      }
-
-      this.inputHeight = "".concat(contentHeight, "px");
-      return this;
-    },
-    sendMessage: function sendMessage() {
-      this.$emit("sendMessage", this.currentValue);
-    }
-  }
-};
-
-function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-    if (typeof shadowMode !== 'boolean') {
-        createInjectorSSR = createInjector;
-        createInjector = shadowMode;
-        shadowMode = false;
-    }
-    // Vue.extend constructor export interop.
-    var options = typeof script === 'function' ? script.options : script;
-    // render functions
-    if (template && template.render) {
-        options.render = template.render;
-        options.staticRenderFns = template.staticRenderFns;
-        options._compiled = true;
-        // functional template
-        if (isFunctionalTemplate) {
-            options.functional = true;
-        }
-    }
-    // scopedId
-    if (scopeId) {
-        options._scopeId = scopeId;
-    }
-    var hook;
-    if (moduleIdentifier) {
-        // server build
-        hook = function (context) {
-            // 2.3 injection
-            context =
-                context || // cached call
-                    (this.$vnode && this.$vnode.ssrContext) || // stateful
-                    (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
-            // 2.2 with runInNewContext: true
-            if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-                context = __VUE_SSR_CONTEXT__;
-            }
-            // inject component styles
-            if (style) {
-                style.call(this, createInjectorSSR(context));
-            }
-            // register component module identifier for async chunk inference
-            if (context && context._registeredComponents) {
-                context._registeredComponents.add(moduleIdentifier);
-            }
-        };
-        // used by ssr in case component is cached and beforeCreate
-        // never gets called
-        options._ssrRegister = hook;
-    }
-    else if (style) {
-        hook = shadowMode
-            ? function (context) {
-                style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
-            }
-            : function (context) {
-                style.call(this, createInjector(context));
-            };
-    }
-    if (hook) {
-        if (options.functional) {
-            // register for functional component in vue file
-            var originalRender = options.render;
-            options.render = function renderWithStyleInjection(h, context) {
-                hook.call(context);
-                return originalRender(h, context);
-            };
-        }
-        else {
-            // inject component registration as beforeCreate hook
-            var existing = options.beforeCreate;
-            options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-        }
-    }
-    return script;
-}
-
-var isOldIE = typeof navigator !== 'undefined' &&
-    /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-function createInjector(context) {
-    return function (id, style) { return addStyle(id, style); };
-}
-var HEAD;
-var styles = {};
-function addStyle(id, css) {
-    var group = isOldIE ? css.media || 'default' : id;
-    var style = styles[group] || (styles[group] = { ids: new Set(), styles: [] });
-    if (!style.ids.has(id)) {
-        style.ids.add(id);
-        var code = css.source;
-        if (css.map) {
-            // https://developer.chrome.com/devtools/docs/javascript-debugging
-            // this makes source maps inside style tags work properly in Chrome
-            code += '\n/*# sourceURL=' + css.map.sources[0] + ' */';
-            // http://stackoverflow.com/a/26603875
-            code +=
-                '\n/*# sourceMappingURL=data:application/json;base64,' +
-                    btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) +
-                    ' */';
-        }
-        if (!style.element) {
-            style.element = document.createElement('style');
-            style.element.type = 'text/css';
-            if (css.media)
-                { style.element.setAttribute('media', css.media); }
-            if (HEAD === undefined) {
-                HEAD = document.head || document.getElementsByTagName('head')[0];
-            }
-            HEAD.appendChild(style.element);
-        }
-        if ('styleSheet' in style.element) {
-            style.styles.push(code);
-            style.element.styleSheet.cssText = style.styles
-                .filter(Boolean)
-                .join('\n');
-        }
-        else {
-            var index = style.ids.size - 1;
-            var textNode = document.createTextNode(code);
-            var nodes = style.element.childNodes;
-            if (nodes[index])
-                { style.element.removeChild(nodes[index]); }
-            if (nodes.length)
-                { style.element.insertBefore(textNode, nodes[index]); }
-            else
-                { style.element.appendChild(textNode); }
-        }
-    }
-}
-
-/* script */
-var __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"textarea"},[_c('div',{staticClass:"flex"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentValue),expression:"currentValue"}],staticClass:"block w-full p-2 rounded-none border-t",style:(_vm.computedStyles),attrs:{"placeholder":_vm.placeholder,"disabled":_vm.disabled},domProps:{"value":(_vm.currentValue)},on:{"focus":_vm.resize,"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }if($event.ctrlKey||$event.shiftKey||$event.altKey||$event.metaKey){ return null; }return _vm.sendMessage($event)},"input":function($event){if($event.target.composing){ return; }_vm.currentValue=$event.target.value;}}}),_vm._v(" "),_c('div',{staticClass:"flex"},[_c('button',{staticClass:"bg-blue-700 px-2 text-white",attrs:{"type":"button"},on:{"click":_vm.sendMessage}},[_vm._v("Send")])])]),_vm._v(" "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentValue),expression:"currentValue"}],ref:"shadow",staticClass:"shadow",attrs:{"tabindex":"0"},domProps:{"value":(_vm.currentValue)},on:{"input":function($event){if($event.target.composing){ return; }_vm.currentValue=$event.target.value;}}})])};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  var __vue_inject_styles__ = function (inject) {
-    if (!inject) { return }
-    inject("data-v-6965cf19_0", { source: ".textarea[data-v-6965cf19]{position:relative}.textarea textarea[data-v-6965cf19]{position:relative;z-index:100;resize:none;overflow:auto;font-size:16px;height:0}.textarea textarea.shadow[data-v-6965cf19]{max-height:0;pointer-events:none;opacity:0;margin:0;padding:0;position:absolute;left:0;top:0}", map: undefined, media: undefined });
-
-  };
-  /* scoped */
-  var __vue_scope_id__ = "data-v-6965cf19";
-  /* module identifier */
-  var __vue_module_identifier__ = undefined;
-  /* functional template */
-  var __vue_is_functional_template__ = false;
-  /* style inject SSR */
-  
-  /* style inject shadow dom */
-  
-
-  
-  var __vue_component__ = /*#__PURE__*/normalizeComponent(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    false,
-    createInjector,
-    undefined,
-    undefined
-  );
-
-function _templateObject4() {
-  var data = _taggedTemplateLiteral(["mutation ($channelId: ID!, $content: String!) {\n            sendMessage(channelId: $channelId, content: $content) {\n              id\n              content\n              owner {\n                id\n                userId\n                nickName\n              }\n              createdAt\n            }\n          }"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["subscription messageAdded($channelId: ID!) {\n        messageAdded(channelId: $channelId) {\n          id\n          content\n          owner {\n            id\n            userId\n            nickName\n          }\n        }\n      }"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["query ($channelId: ID!) {\n            messages(channelId: $channelId) {\n              id\n              owner {\n                id\n                nickName\n                userId\n              }\n              content\n              createdAt\n            }\n          }"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["mutation ($apiKey: String!, $userId: ID!, $nickName: String!) {\n            connect(apiKey: $apiKey, userId: $userId, nickName: $nickName) {\n              user {\n                id\n                userId\n                nickName\n                profileURL\n              }\n              token\n            }\n          }"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-var script$1 = {
-  name: 'VueMiniChatter',
-  props: {
-    apiKey: {
-      type: String,
-      required: true
-    },
-    channelId: {
-      type: String,
-      required: true
-    },
-    userId: {
-      type: String,
-      required: true
-    },
-    nickName: {
-      type: String,
-      required: true
-    }
-  },
-  components: {
-    TextareaAutosize: __vue_component__
-  },
-  data: function data() {
-    return {
-      messages: [],
-      token: null,
-      user: null,
-      connected: false,
-      value: null,
-      wsLink: null
-    };
-  },
-  filters: {
-    dateFormat: function dateFormat(value) {
-      if (!value) { return ''; }
-      return moment(value).format("LT");
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    var httpLink = createHttpLink({
-      // You should use an absolute URL here
-      uri: 'http://localhost:9000/graphql',
-      fetch: fetch
-    });
-    var wsLink = new WebSocketLink({
-      uri: 'ws://localhost:9000/graphql',
-      options: {
-        reconnect: true,
-        lazy: true,
-        connectionParams: function connectionParams() {
-          return {
-            authorization: _this.token
-          };
-        }
-      }
-    });
-    this.wsLink = wsLink; // Cache implementation
-
-    var cache = new InMemoryCache();
-    var link = split( // split based on operation type
-    function (_ref) {
-      var query = _ref.query;
-      var definition = getMainDefinition(query);
-      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
-    }, wsLink, httpLink); // Create the apollo client
-
-    this.apolloClient = new ApolloClient({
-      link: link,
-      cache: cache
-    });
-  },
-  mounted: function mounted() {
-    console.log("mini chatter mounted");
-    this.connect();
-  },
-  methods: {
-    nl2br: function nl2br(value) {
-      return value.replace(/\n/g, "<br>");
-    },
-    connect: function connect() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _yield$_this2$apolloC, connect;
-
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return _this2.apolloClient.mutate({
-                  mutation: gql(_templateObject()),
-                  variables: {
-                    apiKey: _this2.apiKey,
-                    userId: _this2.userId,
-                    nickName: _this2.nickName
-                  }
-                });
-
-              case 3:
-                _yield$_this2$apolloC = _context.sent;
-                connect = _yield$_this2$apolloC.data.connect;
-                _this2.connected = true;
-                _this2.user = connect.user;
-                _this2.token = connect.token;
-
-                _this2.getMessages();
-
-                _context.next = 14;
-                break;
-
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](0);
-
-                _this2.$toast.error(_context.t0.message, {
-                  duration: 2000
-                });
-
-              case 14:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 11]]);
-      }))();
-    },
-    getMessages: function getMessages() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var _yield$_this3$apolloC, messages;
-
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return _this3.apolloClient.query({
-                  query: gql(_templateObject2()),
-                  variables: {
-                    channelId: _this3.channelId
-                  },
-                  context: {
-                    headers: {
-                      authorization: _this3.token
-                    }
-                  }
-                });
-
-              case 3:
-                _yield$_this3$apolloC = _context2.sent;
-                messages = _yield$_this3$apolloC.data.messages;
-                _this3.messages = messages;
-
-                _this3.startSubscriptionMessages();
-
-                _context2.next = 12;
-                break;
-
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](0);
-
-                _this3.$toast.error(_context2.t0.message, {
-                  duration: 2000
-                });
-
-              case 12:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[0, 9]]);
-      }))();
-    },
-    startSubscriptionMessages: function startSubscriptionMessages() {
-      var subQuery = gql(_templateObject3());
-      var observer = this.apolloClient.subscribe({
-        query: subQuery,
-        variables: {
-          channelId: this.channelId
-        },
-        context: {
-          headers: {
-            authorization: this.token
-          }
-        }
-      });
-      var self = this;
-      observer.subscribe({
-        next: function next(_ref2) {
-          var messageAdded = _ref2.data.messageAdded;
-          //console.log(messageAdded)
-          self.messages = [].concat(_toConsumableArray(self.messages), [messageAdded]);
-          console.log("scollToBottom");
-          self.scollToBottom();
-        },
-        error: function error(e) {
-          console.log(e);
-          this.$toast.error(e.message, {
-            duration: 2000
-          });
-        }
-      });
-    },
-    sendMessage: function sendMessage(message) {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-        var _yield$_this4$apolloC, sendMessage;
-
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                if (message) {
-                  _context3.next = 2;
-                  break;
-                }
-
-                return _context3.abrupt("return");
-
-              case 2:
-                if (!(_this4.wsLink.subscriptionClient.status != 1)) {
-                  _context3.next = 5;
-                  break;
-                }
-
-                _this4.$toast.error("SOCKET NOT READY", {
-                  duration: 2000
-                });
-
-                return _context3.abrupt("return");
-
-              case 5:
-                _context3.prev = 5;
-                _context3.next = 8;
-                return _this4.apolloClient.mutate({
-                  mutation: gql(_templateObject4()),
-                  variables: {
-                    channelId: _this4.channelId,
-                    content: message
-                  },
-                  context: {
-                    headers: {
-                      authorization: _this4.token
-                    }
-                  }
-                });
-
-              case 8:
-                _yield$_this4$apolloC = _context3.sent;
-                sendMessage = _yield$_this4$apolloC.data.sendMessage;
-                _this4.$refs.input.currentValue = null;
-                _context3.next = 16;
-                break;
-
-              case 13:
-                _context3.prev = 13;
-                _context3.t0 = _context3["catch"](5);
-
-                _this4.$toast.error(_context3.t0.message, {
-                  duration: 2000
-                });
-
-              case 16:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[5, 13]]);
-      }))();
-    },
-    scollToBottom: function scollToBottom() {
-      var _this5 = this;
-
-      this.$nextTick(function () {
-        setTimeout(function () {
-          console.log(_this5.$refs["messages"]);
-          var scrollHeight = _this5.$refs["messages"].scrollHeight;
-
-          _this5.$refs["messages"].scrollTo(0, scrollHeight); //window.scrollTo(0, scrollHeight)
-
-        }, 100);
-      });
-    }
-  }
-};
-
-/* script */
-var __vue_script__$1 = script$1;
-
-/* template */
-var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('main',{staticClass:"flex flex-column"},[_c('div',{staticClass:"h-screen bg-red-200 flex-1 flex flex-column"},[_c('div',{ref:"messages",staticClass:"px-4 flex-1 overflow-scroll",attrs:{"id":"messages"}},_vm._l((_vm.messages),function(message){return _c('div',{key:message.id},[_c('div',{staticClass:"flex my-4 items-start",class:message.owner.id == _vm.user.id ? 'justify-end': 'justify-start'},[(message.owner.id != _vm.user.id)?_c('div',{staticClass:"mr-2"}):_vm._e(),_vm._v(" "),_c('div',[_c('div',{staticClass:"text-sm"},[_vm._v(" "+_vm._s(message.owner.nickName)+" ")]),_vm._v(" "),_c('div',{staticClass:"bg-red-400 p-2 rounded text-md",domProps:{"innerHTML":_vm._s(_vm.nl2br(message.content))}}),_vm._v(" "),_c('div',{staticClass:"text-xs"},[_vm._v("\n              "+_vm._s(_vm._f("dateFormat")(message.createdAt))+"\n            ")])])])])}),0),_vm._v(" "),_c('div',{attrs:{"id":"input_container"}},[_c('textarea-autosize',{ref:"input",attrs:{"placeholder":"Type something here...","min-height":50,"max-height":200,"disabled":false},on:{"sendMessage":_vm.sendMessage}})],1)])])};
-var __vue_staticRenderFns__$1 = [];
-
-  /* style */
-  var __vue_inject_styles__$1 = undefined;
-  /* scoped */
-  var __vue_scope_id__$1 = undefined;
-  /* module identifier */
-  var __vue_module_identifier__$1 = undefined;
-  /* functional template */
-  var __vue_is_functional_template__$1 = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-  /* style inject shadow dom */
-  
-
-  
-  var __vue_component__$1 = /*#__PURE__*/normalizeComponent(
-    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
-    __vue_inject_styles__$1,
-    __vue_script__$1,
-    __vue_scope_id__$1,
-    __vue_is_functional_template__$1,
-    __vue_module_identifier__$1,
-    false,
-    undefined,
-    undefined,
-    undefined
-  );
-
-//   install(Vue, args = {}) {
+function normalizeComponent(a,b,c,d,e,f/* server only */,g,h,i,j){"boolean"!=typeof g&&(i=h,h=g,g=!1);// Vue.extend constructor export interop.
+var k="function"==typeof c?c.options:c;// render functions
+a&&a.render&&(k.render=a.render,k.staticRenderFns=a.staticRenderFns,k._compiled=!0,e&&(k.functional=!0)),d&&(k._scopeId=d);var l;if(f?(l=function(a){a=a||// cached call
+this.$vnode&&this.$vnode.ssrContext||// stateful
+this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,a||"undefined"==typeof __VUE_SSR_CONTEXT__||(a=__VUE_SSR_CONTEXT__),b&&b.call(this,i(a)),a&&a._registeredComponents&&a._registeredComponents.add(f)},k._ssrRegister=l):b&&(l=g?function(a){b.call(this,j(a,this.$root.$options.shadowRoot))}:function(a){b.call(this,h(a))}),l)if(k.functional){// register for functional component in vue file
+var m=k.render;k.render=function(a,b){return l.call(b),m(a,b)}}else{// inject component registration as beforeCreate hook
+var n=k.beforeCreate;k.beforeCreate=n?[].concat(n,l):[l]}return c}var isOldIE="undefined"!=typeof navigator&&/msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());function createInjector(){return function(a,b){return addStyle(a,b)}}var HEAD,styles={};function addStyle(a,b){var c=isOldIE?b.media||"default":a,d=styles[c]||(styles[c]={ids:new Set,styles:[]});if(!d.ids.has(a)){d.ids.add(a);var e=b.source;if(b.map&&(e+="\n/*# sourceURL="+b.map.sources[0]+" */",e+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(b.map))))+" */"),d.element||(d.element=document.createElement("style"),d.element.type="text/css",b.media&&d.element.setAttribute("media",b.media),void 0===HEAD&&(HEAD=document.head||document.getElementsByTagName("head")[0]),HEAD.appendChild(d.element)),"styleSheet"in d.element)d.styles.push(e),d.element.styleSheet.cssText=d.styles.filter(Boolean).join("\n");else{var f=d.ids.size-1,g=document.createTextNode(e),h=d.element.childNodes;h[f]&&d.element.removeChild(h[f]),h.length?d.element.insertBefore(g,h[f]):d.element.appendChild(g)}}}/* script */var __vue_script__=script,__vue_render__=function(){var a=this,b=a.$createElement,c=a._self._c||b;return c("div",{staticClass:"textarea"},[c("div",{staticClass:"flex"},[c("textarea",{directives:[{name:"model",rawName:"v-model",value:a.currentValue,expression:"currentValue"}],staticClass:"block w-full p-2 rounded-none border-t",style:a.computedStyles,attrs:{placeholder:a.placeholder,disabled:a.disabled},domProps:{value:a.currentValue},on:{focus:a.resize,keyup:function(b){return!b.type.indexOf("key")&&a._k(b.keyCode,"enter",13,b.key,"Enter")?null:b.ctrlKey||b.shiftKey||b.altKey||b.metaKey?null:a.sendMessage(b)},input:function(b){b.target.composing||(a.currentValue=b.target.value)}}}),a._v(" "),c("div",{staticClass:"flex"},[c("button",{staticClass:"bg-blue-700 px-2 text-white",attrs:{type:"button"},on:{click:a.sendMessage}},[a._v("Send")])])]),a._v(" "),c("textarea",{directives:[{name:"model",rawName:"v-model",value:a.currentValue,expression:"currentValue"}],ref:"shadow",staticClass:"shadow",attrs:{tabindex:"0"},domProps:{value:a.currentValue},on:{input:function(b){b.target.composing||(a.currentValue=b.target.value)}}})])},__vue_staticRenderFns__=[],__vue_inject_styles__=function(a){a&&a("data-v-83268a58_0",{source:".textarea[data-v-83268a58]{position:relative}.textarea textarea[data-v-83268a58]{position:relative;z-index:100;resize:none;overflow:auto;font-size:16px;height:0}.textarea textarea.shadow[data-v-83268a58]{max-height:0;pointer-events:none;opacity:0;margin:0;padding:0;position:absolute;left:0;top:0}",map:void 0,media:void 0})},__vue_scope_id__="data-v-83268a58",__vue_module_identifier__=void 0,__vue_is_functional_template__=!1,__vue_component__=/*#__PURE__*/normalizeComponent({render:__vue_render__,staticRenderFns:__vue_staticRenderFns__},__vue_inject_styles__,__vue_script__,__vue_scope_id__,__vue_is_functional_template__,__vue_module_identifier__,!1,createInjector,void 0,void 0);/* template */function _templateObject4(){var a=taggedTemplateLiteral(["mutation ($channelId: ID!, $content: String!) {\n            sendMessage(channelId: $channelId, content: $content) {\n              id\n              content\n              owner {\n                id\n                userId\n                nickName\n              }\n              createdAt\n            }\n          }"]);return _templateObject4=function(){return a},a}function _templateObject3(){var a=taggedTemplateLiteral(["subscription messageAdded($channelId: ID!) {\n        messageAdded(channelId: $channelId) {\n          id\n          content\n          owner {\n            id\n            userId\n            nickName\n          }\n        }\n      }"]);return _templateObject3=function(){return a},a}function _templateObject2(){var a=taggedTemplateLiteral(["query ($channelId: ID!) {\n            messages(channelId: $channelId) {\n              id\n              owner {\n                id\n                nickName\n                userId\n              }\n              content\n              createdAt\n            }\n          }"]);return _templateObject2=function(){return a},a}function _templateObject(){var a=taggedTemplateLiteral(["mutation ($apiKey: String!, $userId: ID!, $nickName: String!) {\n            connect(apiKey: $apiKey, userId: $userId, nickName: $nickName) {\n              user {\n                id\n                userId\n                nickName\n                profileURL\n              }\n              token\n            }\n          }"]);return _templateObject=function(){return a},a}var script$1={name:"VueMiniChatter",props:{apiKey:{type:String,required:!0},channelId:{type:String,required:!0},userId:{type:String,required:!0},nickName:{type:String,required:!0}},components:{TextareaAutosize:__vue_component__},data:function(){return{messages:[],token:null,user:null,connected:!1,value:null,wsLink:null}},filters:{dateFormat:function(a){return a?moment(a).format("LT"):""}},created:function(){var a=this,b=createHttpLink({// You should use an absolute URL here
+uri:"http://localhost:9000/graphql",fetch:fetch}),c=new WebSocketLink({uri:"ws://localhost:9000/graphql",options:{reconnect:!0,lazy:!0,connectionParams:function(){return{authorization:a.token}}}});this.wsLink=c;// Cache implementation
+var d=new InMemoryCache,e=split(// split based on operation type
+function(a){var b=a.query,c=getMainDefinition(b);return"OperationDefinition"===c.kind&&"subscription"===c.operation},c,b);// Create the apollo client
+this.apolloClient=new ApolloClient({link:e,cache:d})},mounted:function(){console.log("mini chatter mounted"),this.connect()},methods:{nl2br:function(a){return a.replace(/\n/g,"<br>")},connect:function(){var a=this;return asyncToGenerator(/*#__PURE__*/regenerator.mark(function b(){var c,d;return regenerator.wrap(function(b){for(;;)switch(b.prev=b.next){case 0:return b.prev=0,b.next=3,a.apolloClient.mutate({mutation:gql(_templateObject()),variables:{apiKey:a.apiKey,userId:a.userId,nickName:a.nickName}});case 3:c=b.sent,d=c.data.connect,a.connected=!0,a.user=d.user,a.token=d.token,a.getMessages(),b.next=14;break;case 11:b.prev=11,b.t0=b["catch"](0),a.$toast.error(b.t0.message,{duration:2e3});case 14:case"end":return b.stop();}},b,null,[[0,11]])}))()},getMessages:function(){var a=this;return asyncToGenerator(/*#__PURE__*/regenerator.mark(function b(){var c,d;return regenerator.wrap(function(b){for(;;)switch(b.prev=b.next){case 0:return b.prev=0,b.next=3,a.apolloClient.query({query:gql(_templateObject2()),variables:{channelId:a.channelId},context:{headers:{authorization:a.token}}});case 3:c=b.sent,d=c.data.messages,a.messages=d,a.startSubscriptionMessages(),b.next=12;break;case 9:b.prev=9,b.t0=b["catch"](0),a.$toast.error(b.t0.message,{duration:2e3});case 12:case"end":return b.stop();}},b,null,[[0,9]])}))()},startSubscriptionMessages:function(){var a=gql(_templateObject3()),b=this.apolloClient.subscribe({query:a,variables:{channelId:this.channelId},context:{headers:{authorization:this.token}}}),c=this;b.subscribe({next:function(a){var b=a.data.messageAdded;//console.log(messageAdded)
+c.messages=[].concat(toConsumableArray(c.messages),[b]),console.log("scollToBottom"),c.scollToBottom()},error:function(a){console.log(a),this.$toast.error(a.message,{duration:2e3})}})},sendMessage:function(a){var b=this;return asyncToGenerator(/*#__PURE__*/regenerator.mark(function c(){var d,e;return regenerator.wrap(function(c){for(;;)switch(c.prev=c.next){case 0:if(a){c.next=2;break}return c.abrupt("return");case 2:if(1==b.wsLink.subscriptionClient.status){c.next=5;break}return b.$toast.error("SOCKET NOT READY",{duration:2e3}),c.abrupt("return");case 5:return c.prev=5,c.next=8,b.apolloClient.mutate({mutation:gql(_templateObject4()),variables:{channelId:b.channelId,content:a},context:{headers:{authorization:b.token}}});case 8:d=c.sent,e=d.data.sendMessage,b.$refs.input.currentValue=null,c.next=16;break;case 13:c.prev=13,c.t0=c["catch"](5),b.$toast.error(c.t0.message,{duration:2e3});case 16:case"end":return c.stop();}},c,null,[[5,13]])}))()},scollToBottom:function(){var a=this;this.$nextTick(function(){setTimeout(function(){console.log(a.$refs.messages);var b=a.$refs.messages.scrollHeight;a.$refs.messages.scrollTo(0,b)},100)})}}},__vue_script__$1=script$1,__vue_render__$1=function(){var a=this,b=a.$createElement,c=a._self._c||b;return c("main",{staticClass:"flex flex-column"},[c("div",{staticClass:"h-screen bg-red-200 flex-1 flex flex-column"},[c("div",{ref:"messages",staticClass:"px-4 flex-1 overflow-scroll",attrs:{id:"messages"}},a._l(a.messages,function(b){return c("div",{key:b.id},[c("div",{staticClass:"flex my-4 items-start",class:b.owner.id==a.user.id?"justify-end":"justify-start"},[b.owner.id==a.user.id?a._e():c("div",{staticClass:"mr-2"}),a._v(" "),c("div",[c("div",{staticClass:"text-sm"},[a._v(" "+a._s(b.owner.nickName)+" ")]),a._v(" "),c("div",{staticClass:"bg-red-400 p-2 rounded text-md",domProps:{innerHTML:a._s(a.nl2br(b.content))}}),a._v(" "),c("div",{staticClass:"text-xs"},[a._v("\n              "+a._s(a._f("dateFormat")(b.createdAt))+"\n            ")])])])])}),0),a._v(" "),c("div",{attrs:{id:"input_container"}},[c("textarea-autosize",{ref:"input",attrs:{placeholder:"Type something here...","min-height":50,"max-height":200,disabled:!1},on:{sendMessage:a.sendMessage}})],1)])])},__vue_staticRenderFns__$1=[],__vue_inject_styles__$1=void 0,__vue_scope_id__$1=void 0,__vue_module_identifier__$1=void 0,__vue_is_functional_template__$1=!1,__vue_component__$1=/*#__PURE__*/normalizeComponent({render:__vue_render__$1,staticRenderFns:__vue_staticRenderFns__$1},__vue_inject_styles__$1,__vue_script__$1,__vue_scope_id__$1,__vue_is_functional_template__$1,__vue_module_identifier__$1,!1,void 0,void 0,void 0);/* script */ //   install(Vue, args = {}) {
 //     if (this.installed) {
 //       return
 //     }
@@ -736,27 +129,5 @@ var __vue_staticRenderFns__$1 = [];
 //     Vue.component('MiniChatter', MiniChatter)
 //   }
 // }
-
-function install(Vue) {
-  if (install.installed) { return; }
-  install.installed = true;
-  Vue.component('MiniChatter', __vue_component__$1);
-}
-var plugin = {
-  install: install
-}; // Auto-install when vue is found (eg. in browser via <script> tag)
-
-var GlobalVue = null;
-
-if (typeof window !== 'undefined') {
-  GlobalVue = window.Vue;
-} else if (typeof global !== 'undefined') {
-  GlobalVue = global.Vue;
-}
-
-if (GlobalVue) {
-  GlobalVue.use(plugin);
-}
-
-export default __vue_component__$1;
-export { install };
+function install(a){install.installed||(install.installed=!0,a.component("MiniChatter",__vue_component__$1))}var plugin={install:install},GlobalVue=null;// Auto-install when vue is found (eg. in browser via <script> tag)
+"undefined"==typeof window?"undefined"!=typeof global&&(GlobalVue=global.Vue):GlobalVue=window.Vue,GlobalVue&&GlobalVue.use(plugin);export default __vue_component__$1;export{install};
